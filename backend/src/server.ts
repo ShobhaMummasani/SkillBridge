@@ -1,24 +1,10 @@
-import express from "express";
-import cors from "cors";
+// Used only when running locally with "npm run dev".
+// On Vercel, /api/index.ts is the entry point instead.
 import dotenv from "dotenv";
+import app from "./app";
 import { connectDB } from "./config/db";
-import authRoutes from "./routes/authRoutes";
-import jobRoutes from "./routes/jobRoutes";
-import applicationRoutes from "./routes/applicationRoutes";
-import userRoutes from "./routes/userRoutes";
 
 dotenv.config();
-
-const app = express();
-app.use(cors());
-app.use(express.json());
-
-app.get("/api/health", (_req, res) => res.json({ status: "ok" }));
-
-app.use("/api/auth", authRoutes);
-app.use("/api/jobs", jobRoutes);
-app.use("/api/applications", applicationRoutes);
-app.use("/api/users", userRoutes);
 
 const PORT = process.env.PORT || 5000;
 
